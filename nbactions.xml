@@ -3,48 +3,15 @@
         <action>
             <actionName>run</actionName>
             <packagings>
-                <packaging>war</packaging>
-                <packaging>ear</packaging>
-                <packaging>ejb</packaging>
+                <packaging>jar</packaging>
             </packagings>
             <goals>
-                <goal>package</goal>
+                <goal>process-classes</goal>
+                <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <netbeans.deploy>true</netbeans.deploy>
-                <netbeans.deploy.clientUrlPart>/index.html</netbeans.deploy.clientUrlPart>
+                <exec.args>-classpath %classpath pkg.Main</exec.args>
+                <exec.executable>java</exec.executable>
             </properties>
         </action>
-        <action>
-            <actionName>debug</actionName>
-            <packagings>
-                <packaging>war</packaging>
-                <packaging>ear</packaging>
-                <packaging>ejb</packaging>
-            </packagings>
-            <goals>
-                <goal>package</goal>
-            </goals>
-            <properties>
-                <netbeans.deploy.debugmode>true</netbeans.deploy.debugmode>
-                <netbeans.deploy>true</netbeans.deploy>
-                <netbeans.deploy.clientUrlPart>/index.html</netbeans.deploy.clientUrlPart>
-            </properties>
-        </action>
-        <action>
-            <actionName>profile</actionName>
-            <packagings>
-                <packaging>ejb</packaging>
-                <packaging>ear</packaging>
-                <packaging>war</packaging>
-            </packagings>
-            <goals>
-                <goal>package</goal>
-            </goals>
-            <properties>
-                <netbeans.deploy>true</netbeans.deploy>
-                <netbeans.deploy.profilemode>true</netbeans.deploy.profilemode>
-                <netbeans.deploy.clientUrlPart>/index.html</netbeans.deploy.clientUrlPart>
-            </properties>
-        </action>
-    </actions>
+</actions>

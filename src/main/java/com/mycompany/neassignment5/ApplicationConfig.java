@@ -17,7 +17,7 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("api")
 public class ApplicationConfig extends Application {
     public Set<Class<?>> getClasses() {
-        Set<Class<?>> result = new HashSet<>();
+        Set<Class<?>> result = new java.util.HashSet<Class<?>>();
         result.add(ProductCodeREST.class);
         result.add(ManufacturerREST.class);
         result.add(ProductREST.class);
