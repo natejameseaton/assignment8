@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NE Restful Service - Product Code</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+           <script>
+            $(document).ready(function() {
+                var baseUrl = '/NEAssignment5/api/productCode';
+                function getProductCodes() {
+                    $.ajax({
+                        url: baseUrl,
+                        method: 'get',
+                        success: function(data) {
+                            table = $('#product-code-table');
+                            table.html('');
+                            $.each(data, function(idx, item) {
+                                newRow = '<tr><td>' + item.prodCode + '</td><td>' +
+                                        item.discountCode + '</td><td>' +
+                                        item.description + '</td></tr>';
+                                table.append(newRow);
+                            });
+                        },
+                        error: function(err) {
+                            alert("There was an error. Check your log"(err));
+                        }
+                    })
+                }
+                
+                function addProductCode() {
+                    newProductCode = {
+                        prodCode: $('#add-product-code').val(),
+                        discountCode: $('#add-discount-code').val(),
+                        description: $('#add-description').val(),
+                    };
+                    $.ajax({
+                        url: baseUrl,
+                        data: JSON.stringify(newProductCode),  
+                        contentType: 'application/json',
+                        method: 'post',
+                        success: getProductCodes,
+                        error: function(err) {
+                            alert(JSON.stringify(err));
+                        }
+                    });
+                }
+                
+                function editProductCode() {                    
+                    editProductCode = {
+                        prodCode: $('#edit-product-code').val(),
+                        discountCode: $('#edit-discount-code').val(),
+                        description: $('#edit-description').val(),
+                    };
+                    $.ajax({
+                        url: baseUrl + '/' + $('#edit-product-code').val(),
+                        data: JSON.stringify(editProductCode),  
+                        contentType: 'application/json',
+                        method: 'put',
+                        success: getProductCodes,
+                        error: function(err) {
+                            alert(JSON.stringify(err));
+                        }
+                    });
+                }
+                
+                function deleteProductCode() {
+                    $.ajax({
+                        url: baseUrl + '/' + $('#del-product-code').val(),
+                        method: 'delete',
+                        success: getProductCodes,
+                        error: function(err) {
+                            alert(JSON.stringify(err));
+                        }
+                    });
+                }
+                
+                getProductCodes();
+                $('#add-button').click(addProductCode);
+                $('#edit-button').click(editProductCode);
+                $('#delete-button').click(deleteProductCode);
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+                    <table class="table">
+                            <tr>
+                            <th>Product Code</th>
+                            <th>Discount Code</th>
+                            <th>Description</th>
+                            </tr>
+                        <tbody id="product-code-table">                            
+                        </tbody>
+                    </table>
+                <div>
+                    <h2>Add Product</h2>
+                        <label>Product Code <input id="add-product-code" /></label>
+                        <label>Discount Code <input id="add-discount-code" /></label>
+                        <label>Description <input id="add-description" /></label>
+                    <button id="add-button">Add Product</button>
+                    
+                    <h2>Edit Product</h2>
+                        <label>Product Code <input id="edit-product-code" /></label>
+                        <label>Discount Code <input id="edit-discount-code" /></label>
+                        <label>Description <input id="edit-description" /></label>
+                    <button id="edit-button">Edit Product</button>
+                    
+                    <h2>Delete Product</h2>
+                        <label>Product Code <input id="del-product-code" /></label>
+                    <button id="delete-button">Delete Product</button>        
+                </div>
+        </div>
+    </body>
+</html>

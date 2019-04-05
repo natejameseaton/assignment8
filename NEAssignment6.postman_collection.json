@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "b96482a2-bdc7-4e20-a33c-a5356f71c99f",
+		"name": "NEAssignment6",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/NEAssignment5/api/manufacturer/2743874",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/NEAssignment5/api/manufacturer/2743874",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"NEAssignment5",
+						"api",
+						"manufacturer",
+						"2743874"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/NEAssignment5/api/productCode/SW",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"description\": \"Software\",\n        \"discountCode\": \"W\",\n        \"prodCode\": \"SW\"\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/NEAssignment5/api/productCode/SW",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"NEAssignment5",
+						"api",
+						"productCode",
+						"SW"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/NEAssignment5/api/product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"description\": \"Identity Server 2\",\n        \"productCode\": \"SW\",\n        \"productId\": 980465\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/NEAssignment5/api/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"NEAssignment5",
+						"api",
+						"product"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

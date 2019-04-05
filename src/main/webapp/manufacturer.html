@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NE Restful Service - Manufacturer</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+           <script>
+            $(document).ready(function() {
+                var baseUrl = '/NEAssignment5/api/manufacturer';
+                function getManufacturers() {
+                    $.ajax({
+                        url: baseUrl,
+                        method: 'get',
+                        success: function(data) {
+                            table = $('#manufacturer-table');
+                            table.html('');
+                            $.each(data, function(idx, item) {
+                                newRow = '<tr><td>' + item.manufacturerId + '</td><td>' +
+                                        item.name + '</td><td>' +
+                                        item.phone + '</td></tr>';
+                                table.append(newRow);
+                            });
+                        },
+                        error: function(err) {
+                            alert("There was an error. Check your log"(err));
+                        }
+                    })
+                }
+                
+                function addManufacturer() {
+                    newManufacturer = {
+                        manufacturerId: $('#add-manufacturer-id').val(),
+                        name: $('#add-name').val(),
+                        phone: $('#add-phone').val(),
+                    };
+                    $.ajax({
+                        url: baseUrl,
+                        data: JSON.stringify(newManufacturer),  
+                        contentType: 'application/json',
+                        method: 'post',
+                        success: getManufacturers,
+                        error: function(err) {
+                            alert(JSON.stringify(err));
+                        }
+                    });
+                }
+                
+                function editManufacturer() {                    
+                    editManufacturer = {
+                        manufacturerId: $('#edit-manufacturer-id').val(),
+                        name: $('#edit-name').val(),
+                        phone: $('#edit-phone').val(),
+                    };
+                    $.ajax({
+                        url: baseUrl + '/' + $('#edit-manufacturer-id').val(),
+                        data: JSON.stringify(editManufacturer),  
+                        contentType: 'application/json',
+                        method: 'put',
+                        success: getManufacturers,
+                        error: function(err) {
+                            alert(JSON.stringify(err));
+                        }
+                    });
+                }
+                
+                function deleteManufacturer() {
+                    $.ajax({
+                        url: baseUrl + '/' + $('#del-manufacturer-id').val(),
+                        method: 'delete',
+                        success: getManufacturers,
+                        error: function(err) {
+                            alert(JSON.stringify(err));
+                        }
+                    });
+                }
+                
+                getManufacturers();
+                $('#add-button').click(addManufacturer);
+                $('#edit-button').click(editManufacturer);
+                $('#delete-button').click(deleteManufacturer);
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+                    <table class="table">
+                            <tr>
+                            <th>Manufacturer ID</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            </tr>
+                        <tbody id="manufacturer-table">                            
+                        </tbody>
+                    </table>
+                <div>
+                    <h2>Add Manufacturer</h2>
+                        <label>Manufacturer ID <input id="add-manufacturer-id" /></label>
+                        <label>Name <input id="add-name" /></label>
+                        <label>Phone <input id="add-phone" /></label>
+                    <button id="add-button">Add Manufacturer</button>
+                    
+                    <h2>Edit Manufacturer</h2>
+                        <label>Manufacturer ID <input id="edit-manufacturer-id" /></label>
+                        <label>Name <input id="edit-name" /></label>
+                        <label>Phone <input id="edit-phone" /></label>
+                    <button id="edit-button">Edit Manufacturer</button>
+                    
+                    <h2>Delete Manufacturer</h2>
+                        <label>Manufacturer ID <input id="del-manufacturer-id" /></label>
+                    <button id="delete-button">Delete Manufacturer</button>        
+                </div>
+        </div>
+    </body>
+</html>

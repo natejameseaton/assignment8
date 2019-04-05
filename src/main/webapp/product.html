@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NE Restful Service - Product</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+           <script>
+            $(document).ready(function() {
+                var baseUrl = '/NEAssignment5/api/product';
+                function getProducts() {
+                    $.ajax({
+                        url: baseUrl,
+                        method: 'get',
+                        success: function(data) {
+                            table = $('#product-table');
+                            table.html('');
+                            $.each(data, function(idx, item) {
+                                newRow = '<tr><td>' + item.productId + '</td><td>' +
+                                        item.productCode + '</td><td>' +
+                                        item.description + '</td></tr>';
+                                table.append(newRow);
+                            });
+                        },
+                        error: function(err) {
+                            alert("There was an error. Check your log"(err));
+                        }
+                    })
+                }
+                
+                function addProduct() {
+                    newProduct = {
+                        productId: $('#add-product-id').val(),
+                        productCode: $('#add-product-code').val(),
+                        description: $('#add-description').val(),
+                    };
+                    $.ajax({
+                        url: baseUrl,
+                        data: JSON.stringify(newProduct),  
+                        contentType: 'application/json',
+                        method: 'post',
+                        success: getProducts,
+                        error: function(err) {
+                            alert(JSON.stringify(err));
+                        }
+                    });
+                }
+                
+                function editProduct() {                    
+                    editProduct = {
+                        productId: $('#edit-product-id').val(),
+                        productCode: $('#edit-product-code').val(),
+                        description: $('#edit-description').val(),
+                    };
+                    $.ajax({
+                        url: baseUrl + '/' + $('#edit-product-id').val(),
+                        data: JSON.stringify(editProduct),  
+                        contentType: 'application/json',
+                        method: 'put',
+                        success: getProducts,
+                        error: function(err) {
+                            alert(JSON.stringify(err));
+                        }
+                    });
+                }
+                
+                function deleteProduct() {
+                    $.ajax({
+                        url: baseUrl + '/' + $('#del-product-id').val(),
+                        method: 'delete',
+                        success: getProducts,
+                        error: function(err) {
+                            alert(JSON.stringify(err));
+                        }
+                    });
+                }
+                
+                getProducts();
+                $('#add-button').click(addProduct);
+                $('#edit-button').click(editProduct);
+                $('#delete-button').click(deleteProduct);
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+                    <table class="table">
+                            <tr>
+                            <th>Product ID</th>
+                            <th>Product Code</th>
+                            <th>Description</th>
+                            </tr>
+                        <tbody id="product-table">                            
+                        </tbody>
+                    </table>
+                <div>
+                    <h2>Add Product</h2>
+                        <label>Product ID <input id="add-product-id" /></label>
+                        <label>Product Code <input id="add-product-code" /></label>
+                        <label>Description <input id="add-description" /></label>
+                    <button id="add-button">Add Product</button>
+                    
+                    <h2>Edit Product</h2>
+                        <label>Product ID <input id="edit-product-id" /></label>
+                        <label>Product Code <input id="edit-product-code" /></label>
+                        <label>Description <input id="edit-description" /></label>
+                    <button id="edit-button">Edit Product</button>
+                    
+                    <h2>Delete Product</h2>
+                        <label>Product ID <input id="del-product-id" /></label>
+                    <button id="delete-button">Delete Product</button>        
+                </div>
+        </div>
+    </body>
+</html>

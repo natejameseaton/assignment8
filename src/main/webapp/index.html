@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NE Assignment 6</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <script>
+            $(document).ready(function()) {
+                function getProductCodes() {
+                    $.ajax({
+                        url.baseUrl,
+                        method: 'get',
+                        success: function(data) {
+                        },
+                        error: function(err) {
+                            alert("Error Alert: Check Logs");
+                            console.log(err);
+                        }
+                    });   
+                } 
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Nathaniel Eaton - Assignment 6 - March 19 2019</h1>
+        <div>
+            <p><a href="product.html">Product</a></p>
+            <p><a href="manufacturer.html">Manufacturer</a></p>
+            <p><a href="productCode.html">Product Code</a></p>
+        </div>
+    </body>
+</html>
